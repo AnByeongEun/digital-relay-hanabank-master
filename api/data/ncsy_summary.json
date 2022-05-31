@@ -1,0 +1,122 @@
+[
+  {
+    "bascDt": "20211210",
+    "haiSvcGrpCd": "KCA",
+    "ncsyDcmmtDvCd": "001",
+    "step1": "021",
+    "step2": "023",
+    "step3": "024",
+    "step4": "025",
+    "step5": "026",
+    "step6": "027",
+    "cnt": 12
+  },
+  {
+    "bascDt": "20211210",
+    "haiSvcGrpCd": "KCA",
+    "ncsyDcmmtDvCd": "001",
+    "step1": "022",
+    "step2": "022",
+    "step3": "022",
+    "step4": "022",
+    "step5": "022",
+    "step6": "022",
+    "cnt": 13
+  },
+  {
+    "bascDt": "20211210",
+    "haiSvcGrpCd": "KCA",
+    "ncsyDcmmtDvCd": "001",
+    "step1": "023",
+    "step2": "022",
+    "step3": "022",
+    "step4": "022",
+    "step5": "022",
+    "step6": "022",
+    "cnt": 14
+  },
+  {
+    "bascDt": "20211210",
+    "haiSvcGrpCd": "KCA",
+    "ncsyDcmmtDvCd": "001",
+    "step1": "024",
+    "step2": "022",
+    "step3": "022",
+    "step4": "022",
+    "step5": "022",
+    "step6": "022",
+    "cnt": 15
+  },
+  {
+    "bascDt": "20211210",
+    "haiSvcGrpCd": "KCA",
+    "ncsyDcmmtDvCd": "001",
+    "step1": "025",
+    "step2": "022",
+    "step3": "022",
+    "step4": "022",
+    "step5": "022",
+    "step6": "022",
+    "cnt": 15
+  },
+  {
+    "bascDt": "20211210",
+    "haiSvcGrpCd": "KCA",
+    "ncsyDcmmtDvCd": "001",
+    "step1": "026",
+    "step2": "022",
+    "step3": "022",
+    "step4": "022",
+    "step5": "022",
+    "step6": "022",
+    "cnt": 14
+  },
+  {
+    "bascDt": "20211210",
+    "haiSvcGrpCd": "KCA",
+    "ncsyDcmmtDvCd": "001",
+    "step1": "027",
+    "step2": "022",
+    "step3": "022",
+    "step4": "022",
+    "step5": "022",
+    "step6": "022",
+    "cnt": 13
+  },
+  {
+    "bascDt": "20211210",
+    "haiSvcGrpCd": "KCA",
+    "ncsyDcmmtDvCd": "001",
+    "step1": "028",
+    "step2": "022",
+    "step3": "022",
+    "step4": "022",
+    "step5": "022",
+    "step6": "022",
+    "cnt": 12
+  },
+  {
+    "bascDt": "20211210",
+    "haiSvcGrpCd": "KCA",
+    "ncsyDcmmtDvCd": "001",
+    "step1": "029",
+    "step2": "022",
+    "step3": "022",
+    "step4": "022",
+    "step5": "022",
+    "step6": "022",
+    "cnt": 11
+  },
+  {
+    "bascDt": "20211210",
+    "haiSvcGrpCd": "KCA",
+    "ncsyDcmmtDvCd": "001",
+    "step1": "030",
+    "step2": "022",
+    "step3": "022",
+    "step4": "022",
+    "step5": "022",
+    "step6": "022",
+    "cnt": 10
+  }
+]

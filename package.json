@@ -1,0 +1,85 @@
+{
+  "name": "digital-relay",
+  "version": "0.0.1",
+  "private": true,
+  "main": "app.js",
+  "bin": {
+    "app": "./app.js"
+  },
+  "scripts": {
+    "start": "cross-env NODE_ENV=development nodemon ./app",
+    "build": "pkg ."
+  },
+  "pkg": {
+    "scripts": [
+      "config/*.json",
+      "config/*.js",
+      "common/*.js",
+      "modules/winston.js",
+      "models/mysql/schema/*.js",
+      "models/oracle/entity/*.js",
+      "models/**/*.model.js",
+      "messages/error/*.js"
+    ],
+    "assets": ".env.*",
+    "targets": [
+      "node12-linux-x64",
+      "node12-macos-x64"
+    ],
+    "outputPath": "dist"
+  },
+  "dependencies": {
+    "aes-js": "^3.1.2",
+    "app-root-path": "^3.0.0",
+    "axios": "^0.21.4",
+    "bluebird": "^3.7.2",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "cron": "^1.8.2",
+    "crypto-js": "^4.1.1",
+    "debug": "^2.6.9",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "hashmap": "^2.4.0",
+    "http-errors": "^1.8.0",
+    "iconv": "^3.0.0",
+    "iconv-lite": "^0.6.3",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash.where": "^3.1.0",
+    "moment": "^2.29.1",
+    "mongoose": "^6.0.13",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.3",
+    "mybatis-mapper": "^0.6.5",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "nanoid": "^3.1.25",
+    "net": "^1.0.2",
+    "node-cron": "^3.0.0",
+    "node-gyp": "^8.4.0",
+    "open-graph-scraper": "^4.9.2",
+    "oracledb": "^5.2.0",
+    "pg": "^8.7.1",
+    "prom-client": "^12.0.0",
+    "sequelize": "^6.12.4",
+    "shelljs": "^0.8.4",
+    "typeorm": "^0.2.41",
+    "typeorm-naming-strategies": "^2.0.0",
+    "urlencode": "^1.1.0",
+    "validate": "^5.1.0",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.5"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "eslint": "^8.5.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.25.2",
+    "nodemon": "^2.0.14",
+    "pkg": "^5.5.2",
+    "pm2": "^5.1.2"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "resCode": "0000",
+  "resMsg": "succ",
+  "data": {
+    "CONTACT_KEY": "nzTqEXwBFXRvEJT7886-",
+    "SYSTEM_STATE": "U",
+    "LINK": {
+      "_id": "ud6YvnsBFXRvEJT7y14V",
+      "CONTACT_KEY": "SoeOqXsBfkp0jN_LkhgM",
+      "CH_KEY": "",
+      "CH_TYPE": "IVR",
+      "ANI": "01087393187",
+      "LINK_KEY": "z1dMGT7F-",
+      "START_YMD": "20210701",
+      "END_YMD": "20210930",
+      "START_TIME": "0000",
+      "END_TIME": "2359",
+      "CLICK_CNT": "2",
+      "AUTHENTICATION": "",
+      "REDIRECT_URL": "http://www.naver.com",
+      "SLINK_URL": "http://192.168.203.184:3000/link/z1dMGT7F-",
+      "INB_TYPE": "",
+      "SNED_TYPE": "",
+      "CUS_TYPE": "",
+      "TIMESTAMP": "20210907135031967",
+      "YMD": "20210907",
+      "HH24MI": "1350",
+      "CREATE_AT": "2021-09-07T04:50:32.005Z",
+      "COUNT": 64
+    },
+    "CUS": {
+      "IVR_STATE": "E",
+      "ANI": "01012345678",
+      "GENDER": "W",
+      "AGE": "33",
+      "BAD_CUS_YN": "Y",
+      "CUS_NO": "11111"
+    },
+    "LAST_SVC": "SVC1",
+    "SVC": [
+      "SVC1",
+      "SVC2",
+      "SVC3"
+    ]
+  },
+  "resDttm": "20210923180801134"
+}

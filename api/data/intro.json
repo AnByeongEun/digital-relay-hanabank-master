@@ -1,0 +1,15 @@
+{
+  "resCode": "0000",
+  "resMsg": "success",
+  "data": {
+    "USE_CH": "IVR",
+    "SYSTEM_STATE": "U",
+    "TITLE": "테스트 인트로입니다",
+    "CONTENT": "인트로 테스트 입니다. 하나 둘 셋",
+    "VIEWCHECK": "1",
+    "CREATE_AT": "20210803101422555",
+    "UPDATE_AT": "20210803101422555",
+    "UPDATE_USER": "nadia"
+  },
+  "resDttm": "20210805112922473"
+}

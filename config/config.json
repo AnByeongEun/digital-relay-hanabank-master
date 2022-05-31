@@ -1,0 +1,11 @@
+{
+    "allowedHttpOrigins": [
+        "*"
+    ],
+    "batchTime": "100",
+    "batchStatus": "N",
+    "elderlyCriteria": 60,
+    "errorCount": 3,
+    "sessionTime": 15,
+    "holidayCode": 71101
+}

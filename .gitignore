@@ -1,0 +1,26 @@
+node_modules
+
+# IntelliJ Configuration
+/.idea/
+
+# VS Code Configuration
+.vscode/
+
+# Local Log Files
+logs/
+
+# variable 
+var/
+var/*
+
+# Deploy & Distribute
+dist/
+
+# Environment (개발 어느정도 진행된 후 주석 해제 필요)
+# .env
+.env.local
+# .env.production
+
+# MacOS Specific
+.DS_Store
+**/.DS_Store

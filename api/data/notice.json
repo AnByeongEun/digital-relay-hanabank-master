@@ -1,0 +1,18 @@
+{
+  "resCode": "0000",
+  "resMsg": "success",
+  "data": [
+    {
+      "USE_CH": "MWEB",
+      "TITLE": "제목5",
+      "CONTENT": "내용5",
+      "MAIN": "0",
+      "VIEWCHECK": "1",
+      "ORDER": "15",
+      "CREATE_AT": "20210806100204725",
+      "UPDATE_AT": "20210806100240899",
+      "UPDATE_USER": "nadia"
+    }
+  ],
+  "resDttm": "20210806142537301"
+}

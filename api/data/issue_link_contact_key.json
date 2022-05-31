@@ -1,0 +1,31 @@
+{
+  "status": 200,
+  "data": {
+    "_id": "bulEL38BtbfCh-nrHaiL",
+    "CONTACT_KEY": "yKCdkn0Bfkp0jN_LrTwH",
+    "CH_KEY": "",
+    "CH_TYPE": "IVR",
+    "ANI": "01067688817",
+    "LINK_KEY": "TYs37mz4u",
+    "START_YMD": "20211206",
+    "END_YMD": "20211231",
+    "START_TIME": "0000",
+    "END_TIME": "2359",
+    "CLICK_CNT": "0",
+    "AUTHENTICATION": "",
+    "REDIRECT_URL": "http://www.ecstel.co.kr",
+    "SLINK_URL": "http://192.168.203.184:3000/link/TYs37mz4u",
+    "INB_TYPE": "",
+    "SNED_TYPE": "",
+    "SVC": "",
+    "CUS_TYPE": "",
+    "VDA_TYPE": "",
+    "TIMESTAMP": "20220225140427525",
+    "YMD": "20220225",
+    "HH24MI": "1404",
+    "CREATE_AT": "2022-02-25T05:04:27.529Z",
+    "COUNT": 0
+  },
+  "code": "0000",
+  "message": "succ"
+}

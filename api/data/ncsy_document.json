@@ -1,0 +1,271 @@
+{
+  "head": [
+    {
+      "haiSvcGrpCd": "KCA",
+      "ncsyDcmtDvCd": "001",
+      "ncstDcmtDvNm": "수신",
+      "ncsyDcmtHeadInfo": [
+        {
+          "head": "업무",
+          "tooltip": "",
+          "column": {
+            "code": "",
+            "step1Cd": null,
+            "name": "step1Nm",
+            "size": 1,
+            "type": "select",
+            "link": false
+          }
+        }
+      ]
+    }
+  ],
+  "bizList": [
+    {
+      "haiSvcGrpCd": "KCA",
+      "ncsyDcmtDvCd": "001",
+      "bizSeqNo": 328,
+      "step1Cd": "010",
+      "step1Nm": "수신 제변경",
+      "step2Cd": "033",
+      "step2Nm": "통장 비밀번호변경",
+      "step3Cd": "001",
+      "step3Nm": "개인",
+      "step4Cd": "001",
+      "step4Nm": "만14세미만 미성년자",
+      "step5Cd": "006",
+      "step5Nm": "법정대리인",
+      "step6Cd": "000",
+      "step6Nm": "업무 요건 없음",
+      "dtls": {
+        "ncsyDcmts": [
+          "미성년자 기준의 기본증명서 (특정 또는 상세)",
+          "<p>미성년자 기준의 가족관계증명서 (일반 또는 상세)</p>",
+          "<p><a href=\"http://km.hanafn.com...\">...</a>",
+          "미성년자의 통장",
+          "통장도장"
+        ],
+        "gudSntcCtts": [
+          {
+            "gudSntcCtt": "개별상황에 따라 추가서류를 요청드릴 수 있습니다.",
+            "smsTgtYn": "Y"
+          },
+          {
+            "gudSntcCtt": "모든 서류는 원본제출이 원칙입니다<p>- 관공서 발행서류 최근 3개월이내 발급...</p>",
+            "smsTgtYn": "Y"
+          },
+          {
+            "gudSntcCtt": "<font color=\"#ff000\">가족관계증명서는 아래의 서류(택1)로 대체...</font>",
+            "smsTgtYn": "N"
+          },
+          {
+            "gudSntcCtt": "미성년자의 예금을 신규한 부 또는 모가&nbsp;내점시 \"<u>신규 시점의 부모...</u>",
+            "smsTgtYn": "Y"
+          },
+          {
+            "gudSntcCtt": "<a href=\"http://km.hanafn.com...\">...</a>",
+            "smsTgtYn": "N"
+          }
+        ],
+        "addDcmtCtt": null,
+        "ncsyDcmtGudCtt": null
+      }
+    },
+    {
+      "haiSvcGrpCd": "KCA",
+      "ncsyDcmtDvCd": "001",
+      "bizSeqNo": 329,
+      "step1Cd": "010",
+      "step1Nm": "수신 제변경",
+      "step2Cd": "033",
+      "step2Nm": "통장 비밀번호변경",
+      "step3Cd": "001",
+      "step3Nm": "개인",
+      "step4Cd": "002",
+      "step4Nm": "만14세이상 ~ 만19세 미만 미성년자",
+      "step5Cd": "006",
+      "step5Nm": "법정대리인",
+      "step6Cd": "000",
+      "step6Nm": "업무 요건 없음",
+      "dtls": {
+        "ncsyDcmts": [
+          "미성년자 기준의 기본증명서 (특정 또는 상세)",
+          "<p>미성년자 기준의 가족관계증명서 (일반 또는 상세)</p>",
+          "<p><a href=\"http://km.hanafn.com...\">...</a>",
+          "미성년자의 통장",
+          "통장도장"
+        ],
+        "gudSntcCtts": [
+          {
+            "gudSntcCtt": "개별상황에 따라 추가서류를 요청드릴 수 있습니다.",
+            "smsTgtYn": "Y"
+          },
+          {
+            "gudSntcCtt": "모든 서류는 원본제출이 원칙입니다<p>- 관공서 발행서류 최근 3개월이내 발급...</p>",
+            "smsTgtYn": "Y"
+          },
+          {
+            "gudSntcCtt": "<font color=\"#ff000\">가족관계증명서는 아래의 서류(택1)로 대체...</font>",
+            "smsTgtYn": "N"
+          },
+          {
+            "gudSntcCtt": "미성년자의 예금을 신규한 부 또는 모가&nbsp;내점시 \"<u>신규 시점의 부모...</u>",
+            "smsTgtYn": "Y"
+          },
+          {
+            "gudSntcCtt": "<a href=\"http://km.hanafn.com...\">...</a>",
+            "smsTgtYn": "N"
+          }
+        ],
+        "addDcmtCtt": null,
+        "ncsyDcmtGudCtt": null
+      }
+    },
+    {
+      "haiSvcGrpCd": "KCA",
+      "ncsyDcmtDvCd": "001",
+      "bizSeqNo": 330,
+      "step1Cd": "010",
+      "step1Nm": "수신 제변경",
+      "step2Cd": "033",
+      "step2Nm": "통장 비밀번호변경",
+      "step3Cd": "001",
+      "step3Nm": "개인",
+      "step4Cd": "003",
+      "step4Nm": "성년",
+      "step5Cd": "001",
+      "step5Nm": "방문자 본인",
+      "step6Cd": "000",
+      "step6Nm": "업무 요건 없음",
+      "dtls": {
+        "ncsyDcmts": [
+          "<a href=\"http://km...\"></a>"
+        ],
+        "gudSntcCtts": [
+          {
+            "gudSntcCtt": "개별상황에 따라 추가서류를 요청드릴 수 있습니다.",
+            "smsTgtYn": "Y"
+          }
+        ],
+        "addDcmtCtt": null,
+        "ncsyDcmtGudCtt": null
+      }
+    },
+    {
+      "haiSvcGrpCd": "KCA",
+      "ncsyDcmtDvCd": "001",
+      "bizSeqNo": 331,
+      "step1Cd": "010",
+      "step1Nm": "수신 제변경",
+      "step2Cd": "033",
+      "step2Nm": "통장 비밀번호변경",
+      "step3Cd": "002",
+      "step3Nm": "개인사업자",
+      "step4Cd": "000",
+      "step4Nm": "고객자격 해당 없음",
+      "step5Cd": "001",
+      "step5Nm": "방문자 본인",
+      "step6Cd": "000",
+      "step6Nm": "업무 요건 없음",
+      "dtls": {
+        "ncsyDcmts": [
+          "<a href=\"http://km...\"></a>"
+        ],
+        "gudSntcCtts": [
+          {
+            "gudSntcCtt": "개별상황에 따라 추가서류를 요청드릴 수 있습니다.",
+            "smsTgtYn": "Y"
+          }
+        ],
+        "addDcmtCtt": null,
+        "ncsyDcmtGudCtt": null
+      }
+    },
+    {
+      "haiSvcGrpCd": "KCA",
+      "ncsyDcmtDvCd": "001",
+      "bizSeqNo": 332,
+      "step1Cd": "010",
+      "step1Nm": "수신 제변경",
+      "step2Cd": "033",
+      "step2Nm": "통장 비밀번호변경",
+      "step3Cd": "003",
+      "step3Nm": "법인",
+      "step4Cd": "000",
+      "step4Nm": "고객자격 해당 없음",
+      "step5Cd": "004",
+      "step5Nm": "대표자",
+      "step6Cd": "000",
+      "step6Nm": "업무 요건 없음",
+      "dtls": {
+        "ncsyDcmts": [
+          "사업자등록증 (또는 사업자등록증명원)",
+          "<p><a href=\"http://km...\"></a></p>",
+          "<p><a href=\"http://km...\"></a></p>",
+          "<p><a href=\"http://km...\"></a>정관,회직,규약,인가증 등</p>",
+          "법인의 통장",
+          "통장도장 (서명사용시 서명)"
+        ],
+        "gudSntcCtts": [
+          {
+            "gudSntcCtt": "개별상황에 따라 추가서류를 요청드릴 수 있습니다.",
+            "smsTgtYn": "Y"
+          },
+          {
+            "gudSntcCtt": "모든 서류는 원본제출이 원칙이며, 관공서 서류는 최근 3개월이내 발급된 서류에 한합니다...",
+            "smsTgtYn": "Y"
+          },
+          {
+            "gudSntcCtt": "설입목적사실 검증서류, 실제소유자 확인서류는 1년 이내 제출한 적이 있는 경우에는 생략 가능하며&nbsp;제출서류가 중복될 경우 1부만 제출해 주시기 바랍니다.",
+            "smsTgtYn": "Y"
+          }
+        ],
+        "addDcmtCtt": null,
+        "ncsyDcmtGudCtt": null
+      }
+    },
+    {
+      "haiSvcGrpCd": "KCA",
+      "ncsyDcmtDvCd": "001",
+      "bizSeqNo": 333,
+      "step1Cd": "010",
+      "step1Nm": "수신 제변경",
+      "step2Cd": "033",
+      "step2Nm": "통장 비밀번호변경",
+      "step3Cd": "003",
+      "step3Nm": "법인",
+      "step4Cd": "000",
+      "step4Nm": "고객자격 해당 없음",
+      "step5Cd": "003",
+      "step5Nm": "대리인",
+      "step6Cd": "000",
+      "step6Nm": "업무 요건 없음",
+      "dtls": {
+        "ncsyDcmts": [
+          "<p>법인 인감증명서..</p>",
+          "<p><a href=\"http://km...\"></a></p>",
+          "<p><a href=\"http://km...\"></a></p>",
+          "<p><a href=\"http://km...\"></a>정관,회직,규약,인가증 등</p>",
+          "법인의 통장",
+          "통장도장 (서명사용시 서명)"
+        ],
+        "gudSntcCtts": [
+          {
+            "gudSntcCtt": "개별상황에 따라 추가서류를 요청드릴 수 있습니다.",
+            "smsTgtYn": "Y"
+          },
+          {
+            "gudSntcCtt": "모든 서류는 원본제출이 원칙이며, 관공서 서류는 최근 3개월이내 발급된 서류에 한합니다...",
+            "smsTgtYn": "Y"
+          },
+          {
+            "gudSntcCtt": "설입목적사실 검증서류, 실제소유자 확인서류는 1년 이내 제출한 적이 있는 경우에는 생략 가능하며&nbsp;제출서류가 중복될 경우 1부만 제출해 주시기 바랍니다.",
+            "smsTgtYn": "Y"
+          }
+        ],
+        "addDcmtCtt": null,
+        "ncsyDcmtGudCtt": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sbiWithDrawOracleApiMapper">
+	<insert id="setFirstAuthState">
+		INSERT INTO PCIBS.TP_IBS_ARSLOG (
+		LOG_SRNO, ATHN_TYCD, CUST_NO,
+		CUST_NM, INBN_USER_ID, OWNR_TLNO,
+		PRGS_STCD, BANK_CD, DEL_YN,
+		FRST_REG_DTTM, FRST_REG_GUID, FRST_REG_USER_NO,
+		LAST_CHNG_DTTM, LAST_CHNG_GUID, LAST_CHNG_USER_NO
+		)
+		SELECT TO_CHAR(MAX(TO_NUMBER(LOG_SRNO)) + 1)
+		<!-- LOG_SRNO -->
+		, '17'
+		<!-- ATHN_TYCDCUST_NO -->
+		, #{custNo}
+		<!-- CUST_NO -->
+		, #{custNm}
+		<!-- CUST_NM -->
+		, 'viewARS'
+		<!-- INBN_USER_ID -->
+		, #{tlno}
+		<!-- OWNR_TLNO -->
+		, '00'
+		<!-- PRGS_STCD -->
+		, '028'
+		<!-- BANK_CD -->
+		, 'N'
+		<!-- DEL_YN -->
+		, SYSDATE
+		<!-- FRST_REG_DTTM -->
+		, #{guid}
+		<!-- FRST_REG_GUID -->
+		, #{userNo}
+		<!-- FRST_REG_USER_NO '811100' -->
+		, SYSDATE
+		<!-- LAST_CHNG_DTTM -->
+		, #{guid}
+		<!-- LAST_CHNG_GUID -->
+		, #{userNo}
+		<!-- LAST_CHNG_USER_NO '811100' -->
+		FROM PCIBS.TP_IBS_ARSLOG
+	</insert>
+	<select id="chkAuthState">
+		<!-- 운영서버에서만 실제 call 발생 -->
+		<!-- PRGS_STCD == 2 and ATHN_NO_TRNM_RESP_CD == 1 OK -->
+		<!--
+		SELECT *
+		FROM PCIBS.TP_IBS_ARSLOG
+		WHERE FRST_REG_GUID = #{guid}
+		-->
+		<!--
+		SELECT LOG_SRNO
+		, ATHN_TYCD
+		, CUST_NO
+		, CUST_NM
+		, INBN_USER_ID
+		, OWNR_TLNO
+		, PRGS_STCD
+		, ATHN_NO_TRNM_RESP_CD
+		, ARS_RESP_STCD
+		, TO_CHAR(TRTM_DTTM, 'YYYYMMDD') AS TRTM_DTTM
+		FROM PCIBS.TP_IBS_ARSLOG
+		WHERE LOG_SR_NO = #{logSrNo}
+		AND CUST_NO = #{custNo}
+		AND INBN_NO = #{custNo}
+		-->
+		SELECT LOG_SRNO
+		, ATHN_TYCD
+		, CUST_NO
+		, CUST_NM
+		, INBN_USER_ID
+		, OWNR_TLNO
+		, PRGS_STCD
+		, ATHN_NO_TRNM_RESP_CD
+		, ARS_RESP_STCD
+		, TO_CHAR(TRTM_DTTM, 'YYYYMMDD') AS TRTM_DTTM
+		FROM PCIBS.TP_IBS_ARSLOG
+		WHERE ATHN_TYCD = '17'
+		AND INBN_USER_ID = 'viewARS'
+		AND LOG_SRNO = #{logSrNo}
+		AND FRST_REG_GUID = #{guid}
+		AND CUST_NO = #{custNo}
+	</select>
+	<select id="testK">
+		SELECT * FROM PCIBS.TP_IBS_ARSLOG WHERE FRST_REG_GUID = '20211026085120181DIVR17216123205'
+	</select>
+	<select id="getRowIdWithCUDAfter">
+		select *
+		from ${tbName} a
+		join (select chartorowid(#{lastRowid}) rid from dual) b
+		on b.rid=a.rowid
+	</select>
+</mapper>

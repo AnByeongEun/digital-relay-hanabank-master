@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="oracleApiMapper">
+
+	<!-- 삭제 필요 -->
+	<select id="countBlacklist">
+		SELECT COUNT(*) as cnt
+		FROM TB_BLACK_LIST
+		WHERE ANI = #{ani}
+			AND DEL_YN = 'N'
+	</select>
+
+	<!-- 삭제 필요 -->
+	<select id="getBlacklist">
+		SELECT *
+		FROM TB_BLACK_LIST
+		WHERE ANI = #{ani}
+			AND DEL_YN = 'N'
+	</select>
+
+	
+	<select id="countServiceDenialUser">
+		SELECT COUNT(*) as cnt
+		FROM TB_SERVICE_DENIAL_USER
+		WHERE ani = #{ani}
+			AND removed_at = 'N'
+	</select>
+	
+	<select id="getServiceDenialUser">
+		SELECT *
+		FROM TB_SERVICE_DENIAL_USER
+		WHERE ani = #{ani}
+			AND removed_at is null
+	</select>
+
+	<select id="getCommonCode">
+		SELECT *
+		FROM (
+				SELECT * 
+				FROM TB_COMMON_CODE
+				<where>
+					<if test="codeGroup != null and codeGroup !=''">
+						AND CODE_GROUP = #{codeGroup}
+					</if>
+					<if test="code != null and code !=''">
+						AND CODE = #{code}
+					</if>
+				</where>
+		)
+		<!-- WHERE ROWNUM <![CDATA[ <= ]]> 1 -->
+	</select>
+
+	<select id="getCommonCodeListByGroup">
+		SELECT *
+		FROM TB_COMMON_CODE
+		WHERE DEL_YN = 'N'
+		AND CODE_GROUP = #{codeGroup}
+		<if test="code != null and code !=''">
+			AND CODE = #{code}
+		</if>
+		<!-- <if test="byPass != null and byPass =='N'">
+			AND <include refid="CHECK_FOR_ACCESS_TOKEN_EXISTS"/>
+		</if> -->
+	</select>
+
+	<!-- 토큰 웹키 검사하는 요청 없음 -->
+	<select id="getExternalDocument">
+		SELECT *
+		FROM TB_EXT_DOCUMENT
+		WHERE DEL_YN = 'N'
+			AND DOQ_CD = #{documentCode}
+	</select>
+
+	<select id="getRequestParams">
+		SELECT pam.REQ_SEQ
+				 , pam.PARAM_SEQ
+		     , pam.PARAM_NAME
+		     , pam.DATA_TYPE
+		     , pam.MIN_LENGTH
+		     , pam.MAX_LENGTH
+		     , pam.OBJECT_PARAM_SEQ
+		     , pam.TEST_DATA
+		     , pam.MANDANTORY_YN
+				 , pam.DEL_YN
+		     , pam.REG_DTTM
+		     , pam.REG_ADMIN_ID
+		     , pam.MOD_DTTM
+		     , pam.MOD_ADMIN_ID
+		  FROM TB_GATEWAY_REQUEST req
+		     , TB_GATEWAY_REQUEST_PARAMS pam
+		 WHERE req.REQ_SEQ = pam.REQ_SEQ
+		   AND req.DEL_YN = 'N'
+		   AND pam.DEL_YN = 'N'
+		   AND req.METHOD = #{method}
+		   AND req.DEPTH_ONE = #{depthOne}
+		   <if test="depthTwo != null and depthTwo !=''">
+		   AND req.DEPTH_TWO = #{depthTwo}
+		   </if>
+		   AND req.DEPTH_THR = #{apiName}
+	</select>
+
+	<select id="getUserMenuList">
+		SELECT A.MENU_SEQ
+		     , B.MENU_NAME
+		     , B.MENU_CODE
+		     , B.MENU_IMAGE_LINK
+		     , B.THRU_IMAGE_LINK
+		     , B.BACKGROUND_COLOR
+		     , B.FONT_COLOR
+		     , B.DISCONN_YN
+		     , B.LINK_NAME
+		     , B.LINK_URL
+		     , B.COUNSELOR_CALL_NUM
+		     , B.SKILL_GROUP_ID
+		     , B.CALLBACK_YN
+		     , B.SERVICE_YN
+		     , B.SERVICE_CODE
+		     , B.SERVICE_NAME
+		     , B.AUTH_LEVEL_CODE
+				 , B.MENU_ORDER
+		     , B.MENU_LEVEL
+		     , B.PARENT_MENU_CODE
+		     , B.MENU_TYPE
+		     , B.STATS_YN
+		     , B.CHILDS_EXIST_YN
+		     , B.DEL_YN
+		     , B.REG_DTTM
+		     , B.REG_ADMIN_ID
+		     , B.MOD_DTTM
+		     , B.MOD_ADMIN_ID
+		  FROM TB_MENU_GROUP_SUB A
+		 INNER JOIN TB_MENU B
+		    ON A.MENU_SEQ = B.MENU_SEQ
+		WHERE A.DEL_YN = 'N'
+		  AND B.DEL_YN = 'N'
+		  AND B.MENU_LEVEL = 2
+		  AND B.MENU_TYPE = 'M'
+		  AND A.GROUP_SEQ IN (
+		      				  SELECT A.GROUP_SEQ
+								FROM TB_USER_GROUP A
+							   INNER JOIN TB_MENU_GROUP B
+							   	  ON A.GROUP_SEQ = B.GROUP_SEQ
+							   WHERE A.USER_TYPE = #{userType}
+								 AND A.DEL_YN = 'N'
+								 AND B.DEL_YN = 'N')
+		<!-- <if test="byPass != null and byPass =='N'">
+		  AND <include refid="CHECK_FOR_ACCESS_TOKEN_EXISTS"/>
+		</if> -->
+		ORDER BY A.GROUP_SUB_ORDER ASC
+	</select>
+
+	<select id="getMenuListByType">
+		SELECT *
+		FROM TB_MENU
+		WHERE DEL_YN = 'N'
+		AND MENU_TYPE = #{menuType}  --M, B, L
+		<if test="byPass != null and byPass =='N'">
+			AND <include refid="CHECK_FOR_ACCESS_TOKEN_EXISTS"/>
+		</if>
+		<if test="menuLevel != null">
+			AND MENU_LEVEL = #{menuLevel} <!-- 210930 Main Page 에서는 menuLevel 1 음성ARS 전환이 노출되면 안됨. -->
+		</if>
+		<if test="menuCode != null">
+			AND MENU_CODE != #{menuCode} <!-- 210930 Main Page 에서는 menuLevel 1 음성ARS 전환이 노출되면 안됨. -->
+		</if>
+		ORDER BY MENU_ORDER ASC
+	</select>
+
+	<!-- bypass이므로 토큰 검사 제거함 -->
+	<select id="getMenuListByParent">
+		SELECT *
+	  FROM TB_MENU
+		WHERE PARENT_MENU_CODE = #{menuCode}
+    		AND DEL_YN = 'N'
+		<!-- <if test="byPass != null and byPass =='N'">
+			AND <include refid="CHECK_FOR_ACCESS_TOKEN_EXISTS"/>
+		</if> -->
+	</select>
+
+	<!-- bypass이므로 토큰 검사 제거함 -->
+	<select id="getMenuInfo">
+		SELECT *
+		  FROM TB_MENU
+		 WHERE DEL_YN = 'N'
+		<if test="childsExistYn =='Y'">
+			AND MENU_CODE like #{menuCodeLike} || '%'
+			AND MENU_CODE NOT IN #{menuCode}
+		</if>
+		<if test="childsExistYn !='Y'">
+			AND MENU_CODE = #{menuCode}
+		</if>
+	</select>
+
+	<!-- 토큰 웹키 검사하는 요청 없음 -->
+	<select id="getMenuListByUrl">
+		SELECT *
+		FROM TB_MENU
+		WHERE DEL_YN = 'N'
+			AND LINK_URL = #{url}
+		ORDER BY MENU_ORDER ASC
+	</select>
+
+	<select id="getRoomByCallid">
+		SELECT ROOM_SEQ, CALL_ID, ANI
+					, SYS_NO, DNIS, CH_NO, OS
+					, CONN_STATUS, COMPANY, CODE, CONFIRM_YN
+					, REG_DTTM, UPD_DTTM 
+		FROM TB_ROOM_INFO 
+		WHERE CALL_ID = #{callId}
+		<!-- AND DEL_YN = 'N' -->
+	</select>
+
+	<select id="getRoomByAni">
+		SELECT *
+		FROM (SELECT ROOM_SEQ, CALL_ID, ANI
+								, SYS_NO, DNIS, CH_NO, OS
+								, CONN_STATUS, COMPANY, CODE, CONFIRM_YN
+								, REG_DTTM, UPD_DTTM
+					FROM TB_ROOM_INFO
+					WHERE ANI = #{ani}
+					ORDER BY ROOM_SEQ DESC)
+		WHERE ROWNUM <![CDATA[ <= ]]> 1
+	</select>
+
+	<insert id="createRoom">
+	    INSERT INTO TB_ROOM_INFO (
+			CALL_ID
+			, ANI
+			, SYS_NO
+			, DNIS
+			, CH_NO
+			, OS
+			, CONN_STATUS
+			, COMPANY
+			, CODE
+			, CONFIRM_YN
+			, REG_DTTM
+			, UPD_DTTM
+	    ) 
+		SELECT #{callId} as callId
+			 , #{ani} as ani
+			 , #{sysNo} as sysNo
+			 , #{dnis} as dnis
+			 , #{chNo} as chNo
+			 , #{os} as os
+			 , #{connStatus} as connStatus
+			 , #{company} as company
+			 , #{code} as code
+			 , #{confirmYn} as confirmYn
+			 , SYSDATE as regDttm
+			 , SYSDATE as updDttm
+		  FROM dual
+	</insert>
+
+	<update id="updateRoom">
+		UPDATE TB_ROOM_INFO
+    SET CONN_STATUS = #{connStatus}
+		    <!--, DEL_YN = 'Y'-->
+    WHERE DEL_YN = 'N'
+        AND CALL_ID = #{callId}
+		    AND ANI = #{ani}
+		    <!-- AND <include refid="CHECK_FOR_ACCESS_TOKEN_EXISTS"/>  -->
+				<!-- TODO: webkey 검사하는 부분 얼마나 되는지 확인해보고 수정 -->
+	</update>
+
+	<select id="getRoomTransaction">
+		SELECT 
+				*
+		FROM (
+			SELECT 
+					rTran.ROOM_HIST_SEQ
+					, rTran.ROOM_SEQ
+					, rTran.MSG_ID
+					, rTran.ETC1 AS STATUS
+					, rTran.REG_DTTM
+					, rTran.UPD_DTTM
+					, rInfo.ANI
+					, '' as USER_NAME
+			FROM TB_ROOM_TRANSACTION rTran 
+			LEFT JOIN TB_ROOM_INFO rInfo 
+				ON rInfo.ROOM_SEQ = rTran.ROOM_SEQ
+			WHERE rTran.ROOM_SEQ = #{roomSeq} 
+			ORDER BY rTran.ROOM_HIST_SEQ DESC 
+	    )
+		WHERE ROWNUM <![CDATA[ <= ]]> 1
+	</select>
+
+	<!-- accessToken 검사 -->
+	<select id="getRoomSessionByAccessToken">
+		SELECT *
+		FROM TB_ROOM_SESSION
+		WHERE DEL_YN = 'N'
+		  AND ACCESS_TOKEN = #{accessToken}
+		  AND EXPIRE_DTTM <![CDATA[ > ]]> TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+			<if test="ani != null and ani != ''">
+			  AND ANI = #{ani}
+			</if>
+	</select>
+
+	<select id="getRoomSessionByAccessTokenAndAni">
+		SELECT *
+		FROM TB_ROOM_SESSION
+		WHERE DEL_YN = 'N'
+		  AND ACCESS_TOKEN = #{accessToken}
+		  AND EXPIRE_DTTM <![CDATA[ > ]]> TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+			AND ANI = #{ani}
+	</select>
+
+	<!-- accessToken, webKey 검사 -->
+	<select id="getRoomSessionByAccessTokenAndWebKey"> 
+		SELECT *
+		FROM TB_ROOM_SESSION
+		WHERE DEL_YN = 'N'
+		  AND ACCESS_TOKEN = #{accessToken}
+			AND WEB_KEY = #{webKey}
+		  AND EXPIRE_DTTM <![CDATA[ > ]]>  TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+	</select>
+
+	<insert id="createRoomSession">
+		INSERT INTO TB_ROOM_SESSION (   <!-- talbe name -->
+			ANI 
+			, CONTACT_KEY
+			, WEB_KEY
+			, ACCESS_TOKEN
+			, EXPIRE_DTTM
+			, DEL_YN
+			, REG_DTTM
+			, UPD_DTTM
+		)
+		SELECT #{ani}
+			  , #{contactKey}
+			  , #{webKey}
+		    , #{accessToken}
+			  , TO_CHAR(SYSDATE+(1/1440 * (SELECT VALUE
+								  FROM TB_COMMON_CODE
+								  WHERE CODE_GROUP = 'sessionTime'
+									AND CODE = 'userSessionTime'
+									AND DEL_YN = 'N')), 'YYYY-MM-DD HH24:MI:SS')
+			  , 'N'
+			  , TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+			  , TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+		FROM dual
+	</insert>
+
+	<delete id="deleteRoomSession">
+		UPDATE TB_ROOM_SESSION
+    SET DEL_YN = 'Y'
+		WHERE DEL_YN = 'N'
+			<if test="accessToken != null and accessToken != ''">
+				AND ACCESS_TOKEN = #{accessToken}
+			</if>
+			<if test="ani != null and ani != ''">
+				AND ANI = #{ani}
+			</if>
+      <!--
+        AND CONTACT_KEY = #{contactKey}
+		    AND LINK_KEY = #{linkKey}
+		  -->
+	</delete>
+
+	<update id="updateRoomSessionExpireTime">
+		UPDATE TB_ROOM_SESSION
+		SET UPD_DTTM = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+		  , EXPIRE_DTTM = TO_CHAR(SYSDATE+(1/1440 * (SELECT VALUE FROM TB_COMMON_CODE WHERE CODE_GROUP = 'sessionTime' AND CODE = 'userSessionTime' AND DEL_YN = 'N')), 'YYYY-MM-DD HH24:MI:SS')
+		WHERE DEL_YN = 'N'
+		  AND ACCESS_TOKEN = #{accessToken}
+	</update>
+
+	<select id="getRoomSessionListLessThanNow">
+		SELECT *
+		FROM TB_ROOM_SESSION
+		WHERE DEL_YN = 'N'
+		  AND EXPIRE_DTTM <![CDATA[ < ]]>  #{now}
+			<!-- AND EXPIRE_DTTM <![CDATA[ < ]]>  TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') -->
+	</select>
+
+	<update id="deleteRoomSessionExpired">
+		UPDATE TB_ROOM_SESSION
+		SET UPD_DTTM = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+		  , DEL_YN = 'Y'
+		WHERE DEL_YN = 'N'
+		  AND EXPIRE_DTTM <![CDATA[ < ]]>  #{now}
+	</update>
+
+	<select id="getServerConfig">
+		SELECT *
+		FROM (
+			SELECT CONFIG_SEQ
+				 , SERVICE_NAME
+				 , MESSAGE_LANG
+				 , ACCTOKEN_EXPIRED
+				 , REST_TIME_OUT
+				 , AES128_ENCRYPT_KEY
+			     , COUNSEL_WAIT_TIME
+				 , COUNSEL_WAIT_USER
+				 , COUNSEL_YN
+				 , COUNSEL_STATUS
+				 , ETC5
+				 , DEL_YN
+				 , REG_DTTM
+				 , REG_ADMIN_ID
+				 , MOD_DTTM
+				 , MOD_ADMIN_ID
+			FROM
+				TB_SERVER_CONFIG
+			ORDER BY 
+				config_seq DESC
+		  )
+		WHERE ROWNUM <![CDATA[ <= ]]> 1
+	</select>
+
+	<update id="updateServerConfigCounsel">
+		UPDATE TB_SERVER_CONFIG
+    SET MOD_DTTM = SYSDATE
+      , MOD_ADMIN_ID = 'admin2' <!-- TODO: ???? -->
+      , COUNSEL_WAIT_TIME = #{waitTime}
+		  , COUNSEL_WAIT_USER = #{waitUser}
+		  , COUNSEL_YN = #{counselYn}
+		  , COUNSEL_STATUS = #{counselStatus}
+    WHERE CONFIG_SEQ = ${configSeq}
+      AND DEL_YN = 'N'
+	</update>
+
+	<!-- web의 SMS인증여부 조회(/web/chkSMSAuth) + mci 에서 쓰긴 하는데 테이블이 없음 -->
+	<select id="chkServiceAuth">
+		SELECT *
+		FROM (SELECT *
+				  FROM TB_SERVICE_AUTH_HIST
+		    	WHERE WEB_KEY = #{webKey}
+				   <!-- AND ACCESS_TOKEN = #{accessToken} -->
+				    AND MENU_CODE = #{menuCode}
+				    AND DEL_YN = 'N'
+				  ORDER BY MOD_DTTM DESC)
+		WHERE ROWNUM <![CDATA[ <= ]]> 1
+	</select>
+
+	<!-- 안쓴다 -->
+	<select id="getRowIdWithCUDAfter">
+		select *
+		from ${tbName} a
+				 join (select chartorowid(#{lastRowid}) rid from dual) b
+					  on b.rid=a.rowid
+	</select>
+
+	<!-- SBI only --> 
+	<!-- 웹키 검사하는 요청 없음 (토큰은 미들웨어에서) -->
+	<select id="getSBICommonCodeInfo">
+		SELECT *
+		FROM TC_CBM_CODEMST
+		WHERE DEL_YN = 'N'
+		  AND COM_ASST_CD != '-1'
+		<if test="cdGrp != null and cdGrp !=''">
+			AND COM_MN_CD = #{cdGrp}	<!-- 'CNTP_FIN_INST_CD' -->
+		</if>
+		<if test="code != null and code !=''">
+			AND COM_ASST_CD = #{code}
+		</if>
+		<if test="val != null and val !=''">
+			AND COM_CD_VAL = #{val}
+		</if>
+	</select>
+
+	<sql id="CHECK_FOR_ACCESS_TOKEN_EXISTS">
+		EXISTS (SELECT ROOM_SESSION_SEQ
+				  FROM TB_ROOM_SESSION
+				 WHERE WEB_KEY = #{webKey}
+				   AND ACCESS_TOKEN = #{accessToken}
+				   AND EXPIRE_DTTM <![CDATA[ > ]]> TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+				)
+	</sql>
+
+  <!-- =========================== mci only =========================== -->
+	<!-- =========================== mci only =========================== -->
+	<!-- =========================== mci only =========================== -->
+	<!-- =========================== mci only =========================== -->
+	<insert id="saveServiceAuth">
+		INSERT INTO TB_SERVICE_AUTH_HIST (
+			 WEB_KEY
+			 , ACCESS_TOKEN
+			 , MENU_CODE
+			 , AUTH_YN
+			 , DEL_YN
+			 , REG_DTTM
+			 , REG_ADMIN_ID
+			 , MOD_DTTM
+			 , MOD_ADMIN_ID
+		) VALUES(
+			#{webKey}
+			, #{accessToken}
+			, #{menuCode}
+			, 'Y'
+			, 'N'
+			, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+			, ''
+			, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+			, ''
+		)
+	</insert>
+
+	<update id="deletePreAuthHist">
+		UPDATE TB_SERVICE_AUTH_HIST
+           SET MOD_DTTM = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+             , DEL_YN = 'Y'
+         WHERE WEB_KEY = #{webKey}
+		   <!-- AND ACCESS_TOKEN = #{accessToken} -->
+           AND MENU_CODE = #{menuCode}
+           AND DEL_YN = 'N'
+	</update>
+
+	<update id="deleteOtherAni">
+		UPDATE TB_SERVICE_AUTH_HIST
+		   SET MOD_DTTM = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+		     , DEL_YN = 'Y'
+		 WHERE MENU_CODE = #{menuCode}
+		   AND DEL_YN = 'N'
+	</update>
+
+	<select id="chkServiceAuthForSMS">
+		SELECT CASE WHEN #{testFlag} = 'Y'
+					THEN NVL((SELECT *
+							FROM (SELECT CASE WHEN AUTH_LEVEL_CODE = 'N'
+											  THEN 'N'
+											  WHEN AUTH_LEVEL_CODE = 'A'
+											  THEN (SELECT AUTH_YN
+													  FROM TB_SERVICE_AUTH_HIST
+													 WHERE WEB_KEY = #{webKey}
+													   AND MENU_CODE = #{ani}
+													   AND DEL_YN = 'N'
+												   )
+											  WHEN AUTH_LEVEL_CODE = 'B'
+											  THEN 'N'
+											  WHEN AUTH_LEVEL_CODE = 'C'
+											  THEN 'N'
+											  ELSE 'N'
+											  END as AUTH_YN
+									FROM TB_MENU
+								   WHERE MENU_CODE = #{menuCode}
+								 )
+						   WHERE ROWNUM <![CDATA[ <= ]]> 1), 'Z')
+					ELSE 'N'
+				    END as AUTH_YN
+		FROM dual
+	</select>
+
+	<select id="chkAniFromWebKey">
+		SELECT AUTH_LEVEL_CODE,
+			   (SELECT ANI
+				FROM TB_ROOM_SESSION
+				WHERE WEB_KEY = #{webKey}
+				  AND DEL_YN = 'N'
+			   ) as ANI
+		 FROM TB_MENU
+		WHERE MENU_CODE = #{menuCode}
+	</select>
+</mapper>

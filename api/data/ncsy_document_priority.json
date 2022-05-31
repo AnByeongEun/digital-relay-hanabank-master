@@ -1,0 +1,32 @@
+{
+  "chType": "MWEB",
+  "confType": "AU",
+  "startDate": "20210101",
+  "endDate": "20240531",
+  "pri": [
+    {
+      "group": "group1",
+      "stepCd": "code1",
+      "stepNm": "name1",
+      "stepOd": 1
+    },
+    {
+      "group": "group2",
+      "stepCd": "code2",
+      "stepNm": "name2",
+      "stepOd": 2
+    },
+    {
+      "group": "group3",
+      "stepCd": "code3",
+      "stepNm": "name3",
+      "stepOd": 3
+    },
+    {
+      "group": "group4",
+      "stepCd": "code4",
+      "stepNm": "name4",
+      "stepOd": 4
+    }
+  ]
+}
