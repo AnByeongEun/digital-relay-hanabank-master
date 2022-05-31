@@ -25,7 +25,7 @@ module.exports = class HanaAgentSummary extends Model {
         field: 'CH_TYPE',
       },
       contactKey: {
-        type: DataTypes.STRING(244),
+        type: DataTypes.STRING(255),
         comment: '컨택키',
         field: 'CONTACT_KEY',
       },
